@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Network Performance Analyzer</title>
+<link rel="stylesheet" href="style.css">
+    
+  </head>
+  <body>
+    <header>
+      <h1>Network Performance Analyzer</h1>
+      <div id="wifiSignalIndicator" class="wifi-signal">100%</div>
+    </header>
+
+    <div class="test-controls">
+      <select id="protocolSelect" class="protocol-select">
+        <option value="tcp">TCP</option>
+        <option value="udp">UDP</option>
+      </select>
+      <button id="runTest">Run Network Test</button>
+      <button id="compareProtocols">Compare TCP vs UDP</button>
+    </div>
+
+    <div class="upload-download">
+      <div class="speedometer-container" id="download-speedometer">
+        <h2>Download Speed</h2>
+        <div>
+          <div class="value-display">0</div>
+          <span class="value-display-mbps">Mbps</span>
+        </div>
+        <div class="speedometer">
+          <div class="dial"></div>
+          <div class="marks"></div>
+          <div class="numbers"></div>
+          <div class="needle"></div>
+        </div>
+        <div class="labels">
+          <span>0</span>
+          <span style="margin-left: -100px">180</span>
+        </div>
+      </div>
+
+      <div class="speedometer-container" id="upload-speedometer">
+        <h2>Upload Speed</h2>
+        <div>
+          <div class="value-display">0</div>
+          <span class="value-display-mbps">Mbps</span>
+        </div>
+
+        <div class="speedometer">
+          <div class="dial"></div>
+          <div class="marks"></div>
+          <div class="numbers"></div>
+          <div class="needle"></div>
+        </div>
+        <div class="labels">
+          <span>0</span>
+          <span>180</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="results"></div>
+
+    <div id="congestionChart" class="chart-container">
+      <h2>Network Congestion Over Time</h2>
+      <div>
+        <select id="timeSelector">
+          <option value="24h">Last 24 Hours</option>
+          <option value="7d">Last 7 Days</option>
+          <option value="30d">Last 30 Days</option>
+        </select>
+      </div>
+      <canvas id="congestionCanvas"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+   <script src="script.js"></script>
+  </body>
+</html>

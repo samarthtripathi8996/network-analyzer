@@ -1,0 +1,5 @@
+# Save this as wsgi.py
+from app1 import app
+
+if __name__ == "__main__":
+    app.run()

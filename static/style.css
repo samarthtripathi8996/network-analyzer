@@ -1,0 +1,263 @@
+      body {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 20px;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background: #111827;
+        font-family: Arial, sans-serif;
+      }
+
+      .upload-download {
+        display: flex;
+        gap: 100px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .speedometer-container {
+        position: relative;
+        width: 400px;
+        background: #1f2937;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+        margin-bottom: 2rem;
+        padding-bottom: 50px;
+      }
+
+      .value-display {
+        text-align: center;
+        color: #06b6d4;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        margin-left: -70px;
+      }
+
+      .value-display-mbps {
+        text-align: center;
+        color: #06b6d4;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        position: absolute;
+        right: 130px;
+        top: 95px;
+      }
+
+      .speedometer {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .dial {
+        position: absolute;
+        width: 100%;
+        height: 200px;
+        border-radius: 100% 100% 0 0;
+        background: conic-gradient(
+          from 180deg,
+          #3b82f6 0%,
+          #06b6d4 50%,
+          #3b82f6 100%
+        );
+        mask: radial-gradient(at 50% 100%, white 45%, transparent 45.5%);
+        -webkit-mask: radial-gradient(
+          at 50% 100%,
+          white 45%,
+          transparent 45.5%
+        );
+      }
+
+      .marks {
+        position: absolute;
+        width: 100%;
+        height: 200px;
+        top: 0;
+      }
+
+      .mark {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 2px;
+        height: 10px;
+        background: #64748b;
+        transform-origin: 50% 100%;
+      }
+
+      .mark.major {
+        height: 15px;
+        width: 3px;
+        background: #06b6d4;
+      }
+
+      .needle {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        height: 160px;
+        background: #06b6d4;
+        transform-origin: bottom center;
+        transform: rotate(-90deg);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 10;
+      }
+
+      .needle::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: -6px;
+        width: 16px;
+        height: 16px;
+        background: #06b6d4;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+      }
+
+      .labels {
+        position: absolute;
+        width: 75%;
+        bottom: 40px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 2rem;
+        color: #94a3b8;
+        margin-top: 1rem;
+      }
+
+      .numbers {
+        position: absolute;
+        width: 100%;
+        height: 200px;
+        top: 0;
+      }
+
+      .number {
+        position: absolute;
+        left: 50%;
+        bottom: 40px;
+        transform-origin: 50% 100%;
+        color: #94a3b8;
+        font-size: 12px;
+      }
+
+      button {
+        margin: 20px;
+        padding: 10px 20px;
+        background: #06b6d4;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background: #0891b2;
+      }
+
+      #results {
+        color: white;
+        margin-top: 2rem;
+        background: #1f2937;
+        padding: 2rem;
+        border-radius: 1rem;
+        font-size: medium;
+        width: 90%;
+        max-width: 1000px;
+      }
+
+      .metric {
+        margin: 0.5rem 0;
+        color: #94a3b8;
+      }
+
+      .metric strong {
+        color: #06b6d4;
+        display: inline-block;
+        width: 150px;
+      }
+
+      h1,
+      h2 {
+        color: white;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .protocol-select {
+        background: #1f2937;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #06b6d4;
+        margin-right: 10px;
+      }
+
+      .test-controls {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        color: #94a3b8;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #374151;
+      }
+
+      .comparison-table th {
+        background-color: #1f2937;
+        color: #06b6d4;
+      }
+
+      .comparison-table tr:nth-child(even) {
+        background-color: #1f293780;
+      }
+
+      .tcp-data {
+        border-left: 3px solid #3b82f6;
+      }
+
+      .udp-data {
+        border-left: 3px solid #06b6d4;
+      }
+
+      .chart-container {
+        width: 100%;
+        height: 400px;
+        margin-top: 30px;
+        background: #1f2937;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      #timeSelector {
+        background: #1f2937;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #06b6d4;
+      }
+      header{
+        background-color: #06b6d4;
+      }
