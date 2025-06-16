@@ -1,0 +1,16 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+# Ignore Python cache and compiled files
+__pycache__/
+
+
+# Ignore virtual environment
+.venv/
+
+# Ignore logs, databases, and csvs
+network_metrics.log
+network_metrics.csv
+network_metrics.db
+
+# Ignore VSCode settings
+.vscode/
+
