@@ -1,21 +1,30 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.10-slim'
+        }
+    }
+
+    environment {
+        VENV_PATH = "./venv"
+    }
 
     stages {
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/samarthtripathi8996/network-analyzer.git'
-
             }
         }
 
         stage('Set Up Python & Dependencies') {
             steps {
                 sh '''
-                python3 -m venv venv
-                . venv/bin/activate
-                pip install --upgrade pip
-                pip install -r requirements.txt || true
+                python3 -m venv $VENV_PATH
+                . $VENV_PATH/bin/activate
+                python -m pip install --upgrade pip
+                if [ -f requirements.txt ]; then
+                    pip install -r requirements.txt
+                fi
                 '''
             }
         }
@@ -23,9 +32,9 @@ pipeline {
         stage('Run app1.py') {
             steps {
                 sh '''
-                . venv/bin/activate
-                python app1.py &
-                sleep 5  # wait for app to initialize if needed
+                . $VENV_PATH/bin/activate
+                nohup python app1.py > app.log 2>&1 &
+                sleep 5
                 '''
             }
         }
@@ -33,7 +42,8 @@ pipeline {
         stage('Run Tests (pytest)') {
             steps {
                 sh '''
-                . venv/bin/activate
+                . $VENV_PATH/bin/activate
+                pip install pytest
                 pytest || true
                 '''
             }
@@ -42,7 +52,7 @@ pipeline {
         stage('Log Network Metrics') {
             steps {
                 sh '''
-                . venv/bin/activate
+                . $VENV_PATH/bin/activate
                 python metricsmeasure.py
                 '''
             }
@@ -50,7 +60,9 @@ pipeline {
 
         stage('Cleanup') {
             steps {
-                sh 'pkill -f app1.py || true'
+                sh '''
+                pkill -f app1.py || true
+                '''
             }
         }
 
