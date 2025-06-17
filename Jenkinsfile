@@ -12,11 +12,9 @@ pipeline {
             }
         }
 
-        stage('Install Python & Set Up Virtualenv') {
+        stage('Set Up Python & Dependencies') {
             steps {
                 sh '''
-                sudo apt-get update
-                sudo apt-get install -y python3 python3-venv python3-pip
                 python3 -m venv venv
                 . venv/bin/activate
                 pip install --upgrade pip
