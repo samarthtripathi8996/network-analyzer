@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/<your-username>/<your-repo-name>.git'
+                git 'https://github.com/samarthtripathi8996/network-analyzer.git'
             }
         }
 
