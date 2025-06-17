@@ -1,12 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.10-slim'
-        }
-    }
+    agent any
 
     environment {
-        VENV_PATH = "./venv"
+        VENV_PATH = "venv"
     }
 
     stages {
@@ -16,12 +12,14 @@ pipeline {
             }
         }
 
-        stage('Set Up Python & Dependencies') {
+        stage('Install Python & Set Up Virtualenv') {
             steps {
                 sh '''
-                python3 -m venv $VENV_PATH
-                . $VENV_PATH/bin/activate
-                python -m pip install --upgrade pip
+                sudo apt-get update
+                sudo apt-get install -y python3 python3-venv python3-pip
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install --upgrade pip
                 if [ -f requirements.txt ]; then
                     pip install -r requirements.txt
                 fi
@@ -32,8 +30,8 @@ pipeline {
         stage('Run app1.py') {
             steps {
                 sh '''
-                . $VENV_PATH/bin/activate
-                nohup python app1.py > app.log 2>&1 &
+                . venv/bin/activate
+                nohup python app1.py > app1.log 2>&1 &
                 sleep 5
                 '''
             }
@@ -42,7 +40,7 @@ pipeline {
         stage('Run Tests (pytest)') {
             steps {
                 sh '''
-                . $VENV_PATH/bin/activate
+                . venv/bin/activate
                 pip install pytest
                 pytest || true
                 '''
@@ -52,7 +50,7 @@ pipeline {
         stage('Log Network Metrics') {
             steps {
                 sh '''
-                . $VENV_PATH/bin/activate
+                . venv/bin/activate
                 python metricsmeasure.py
                 '''
             }
@@ -60,9 +58,7 @@ pipeline {
 
         stage('Cleanup') {
             steps {
-                sh '''
-                pkill -f app1.py || true
-                '''
+                sh 'pkill -f app1.py || true'
             }
         }
 
