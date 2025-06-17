@@ -11,7 +11,21 @@ import speedtest
 import socket
 import subprocess
 import logging
+import socket
+import time
 
+def send_to_graphite(metric_path, value, timestamp=None, server='localhost', port=2003):
+    if timestamp is None:
+        timestamp = int(time.time())
+    message = f"{metric_path} {value} {timestamp}\n"
+    try:
+        sock = socket.socket()
+        sock.connect((server, port))
+        sock.sendall(message.encode())
+        sock.close()
+        print(f"Sent to Graphite: {message.strip()}")
+    except Exception as e:
+        print(f"Failed to send metric to Graphite: {e}")
 # Set up logging
 logging.basicConfig(
     level=logging.INFO,
@@ -132,7 +146,9 @@ def get_historical_data(timeframe='24h'):
         
         conn.close()
         logger.info(f"Retrieved {len(results)} historical data points for timeframe: {timeframe}")
+        send_to_graphite("results", results)
         return results
+        
     except Exception as e:
         logger.error(f"Failed to get historical data: {e}")
         return []
