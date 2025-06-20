@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  nagios:
+    image: jasonrivers/nagios:latest
+    container_name: nagios
+    ports:
+      - "8081:80"
+    environment:
+      - NAGIOSADMIN_USER=admin
+      - NAGIOSADMIN_PASS=admin
+    volumes:
+      - ./nagios/etc:/opt/nagios/etc
+      - ./nagios/var:/opt/nagios/var
+      - ./nagios/libexec:/opt/nagios/libexec
+
+  graphite:
+    image: graphiteapp/graphite-statsd
+    container_name: graphite
+    ports:
+      - "8082:80"     # Graphite web UI
+      - "2003:2003"   # Plaintext carbon receiver
+      - "8125:8125/udp"  # StatsD
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  grafana-storage:
