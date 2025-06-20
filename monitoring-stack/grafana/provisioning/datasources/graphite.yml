@@ -1,0 +1,16 @@
+# grafana/provisioning/datasources/graphite.yml
+apiVersion: 1
+
+datasources:
+  - name: Graphite
+    type: graphite
+    access: proxy
+    url: http://graphite:80
+    isDefault: true
+    version: 1
+    editable: true
+    jsonData:
+      graphiteVersion: "1.1"
+      httpHeaderName1: "X-WEBAUTH-USER"
+    secureJsonData:
+      httpHeaderValue1: "admin"
