@@ -1,81 +1,96 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Network Performance Analyzer</title>
-<link rel="stylesheet" href="style.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Performance Monitor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Network Performance Monitor</h1>
+            <div class="status-indicator" id="connectionStatus">
+                <span class="status-dot"></span>
+                <span class="status-text">Connected</span>
+            </div>
+        </header>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Download Speed</h3>
+                <canvas id="downloadGauge" width="200" height="200"></canvas>
+                <div class="metric-value" id="downloadValue">0 Mbps</div>
+            </div>
+
+            <div class="metric-card">
+                <h3>Upload Speed</h3>
+                <canvas id="uploadGauge" width="200" height="200"></canvas>
+                <div class="metric-value" id="uploadValue">0 Mbps</div>
+            </div>
+
+            <div class="metric-card">
+                <h3>Latency</h3>
+                <canvas id="latencyGauge" width="200" height="200"></canvas>
+                <div class="metric-value" id="latencyValue">0 ms</div>
+            </div>
+
+            <div class="metric-card">
+                <h3>WiFi Signal</h3>
+                <canvas id="wifiGauge" width="200" height="200"></canvas>
+                <div class="metric-value" id="wifiValue">0 dBm</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="refreshBtn" class="btn primary">Refresh Metrics</button>
+            <select id="protocolSelect" class="protocol-select">
+                <option value="tcp">TCP Test</option>
+                <option value="udp">UDP Test</option>
+                <option value="http">HTTP Test</option>
+                <option value="https">HTTPS Test</option>
+                <option value="icmp">ICMP Test</option>
+            </select>
+            <button id="protocolTestBtn" class="btn secondary">Run Protocol Test</button>
+        </div>
+
+        <div class="chart-container">
+            <h3>Historical Data</h3>
+            <div class="timeframe-selector">
+                <button class="timeframe-btn active" data-timeframe="24h">24 Hours</button>
+                <button class="timeframe-btn" data-timeframe="7d">7 Days</button>
+                <button class="timeframe-btn" data-timeframe="30d">30 Days</button>
+            </div>
+            <canvas id="historicalChart" width="800" height="400"></canvas>
+        </div>
+
+        <div class="additional-metrics">
+            <div class="metric-row">
+                <span class="metric-label">Jitter:</span>
+                <span class="metric-data" id="jitterValue">0 ms</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">DNS Lookup:</span>
+                <span class="metric-data" id="dnsValue">0 ms</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Packet Loss:</span>
+                <span class="metric-data" id="packetLossValue">0%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Traceroute Hops:</span>
+                <span class="metric-data" id="tracerouteValue">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="speedometer-gauge.js"></script>
+    <script src="chart.js"></script>
+    <script src="script.js"></script>
+    <script src="protocol-bars.js"></script>
+    <script src="protocol-radar.js"></script>
+    <script src="protocol-table.js"></script> 
+    <script src="protocol-comparison.js"></script>
     
-  </head>
-  <body>
-    <header>
-      <h1>Network Performance Analyzer</h1>
-      <div id="wifiSignalIndicator" class="wifi-signal">100%</div>
-    </header>
-
-    <div class="test-controls">
-      <select id="protocolSelect" class="protocol-select">
-        <option value="tcp">TCP</option>
-        <option value="udp">UDP</option>
-      </select>
-      <button id="runTest">Run Network Test</button>
-      <button id="compareProtocols">Compare TCP vs UDP</button>
-    </div>
-
-    <div class="upload-download">
-      <div class="speedometer-container" id="download-speedometer">
-        <h2>Download Speed</h2>
-        <div>
-          <div class="value-display">0</div>
-          <span class="value-display-mbps">Mbps</span>
-        </div>
-        <div class="speedometer">
-          <div class="dial"></div>
-          <div class="marks"></div>
-          <div class="numbers"></div>
-          <div class="needle"></div>
-        </div>
-        <div class="labels">
-          <span>0</span>
-          <span style="margin-left: -100px">180</span>
-        </div>
-      </div>
-
-      <div class="speedometer-container" id="upload-speedometer">
-        <h2>Upload Speed</h2>
-        <div>
-          <div class="value-display">0</div>
-          <span class="value-display-mbps">Mbps</span>
-        </div>
-
-        <div class="speedometer">
-          <div class="dial"></div>
-          <div class="marks"></div>
-          <div class="numbers"></div>
-          <div class="needle"></div>
-        </div>
-        <div class="labels">
-          <span>0</span>
-          <span>180</span>
-        </div>
-      </div>
-    </div>
-
-    <div id="results"></div>
-
-    <div id="congestionChart" class="chart-container">
-      <h2>Network Congestion Over Time</h2>
-      <div>
-        <select id="timeSelector">
-          <option value="24h">Last 24 Hours</option>
-          <option value="7d">Last 7 Days</option>
-          <option value="30d">Last 30 Days</option>
-        </select>
-      </div>
-      <canvas id="congestionCanvas"></canvas>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-   <script src="script.js"></script>
-  </body>
+</body>
 </html>
