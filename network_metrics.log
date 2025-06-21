@@ -1039,3 +1039,187 @@
 2025-05-18 13:06:51,715 - network_api - INFO - Metrics stored in database successfully
 2025-05-18 13:06:51,718 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
 2025-05-18 13:06:51,718 - network_api - INFO - Background metrics collection completed
+2025-06-21 12:17:22,057 - network_metrics - INFO - Database initialized successfully
+2025-06-21 12:17:22,061 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:17:22,061 - network_api - INFO - Starting Network Metrics API server
+2025-06-21 12:17:23,634 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.206.253:5000
+2025-06-21 12:17:23,634 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-21 12:18:26,992 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:18:26] "GET / HTTP/1.1" 200 -
+2025-06-21 12:18:27,068 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:18:27] "GET /style.css HTTP/1.1" 200 -
+2025-06-21 12:18:27,136 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:18:27] "GET /script.js HTTP/1.1" 200 -
+2025-06-21 12:18:27,924 - network_api - INFO - API request received: /api/historical/24h
+2025-06-21 12:18:27,958 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:18:27] "GET /favicon.ico HTTP/1.1" 200 -
+2025-06-21 12:18:27,971 - network_metrics - INFO - Retrieved 0 historical data points for timeframe: 24h
+2025-06-21 12:18:27,973 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:18:27] "GET /api/historical/24h HTTP/1.1" 200 -
+2025-06-21 12:18:31,535 - network_api - INFO - API request received: /api/metrics
+2025-06-21 12:18:31,535 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:18:41,708 - network_api - INFO - API request received: /api/historical/30d
+2025-06-21 12:18:41,772 - network_metrics - INFO - Retrieved 1 historical data points for timeframe: 30d
+2025-06-21 12:18:41,775 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:18:41] "GET /api/historical/30d HTTP/1.1" 200 -
+2025-06-21 12:18:46,405 - network_metrics - INFO - Bandwidth: Download=37.03 Mbps, Upload=7.67 Mbps
+2025-06-21 12:18:46,605 - network_metrics - INFO - Latency: 150.62 ms
+2025-06-21 12:18:46,740 - network_api - INFO - API request received: /api/historical/7d
+2025-06-21 12:18:46,744 - network_metrics - INFO - Retrieved 1 historical data points for timeframe: 7d
+2025-06-21 12:18:46,746 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:18:46] "GET /api/historical/7d HTTP/1.1" 200 -
+2025-06-21 12:18:46,765 - network_metrics - INFO - Jitter: 7.57 ms
+2025-06-21 12:18:46,798 - network_metrics - INFO - DNS Lookup Time: 31.54 ms
+2025-06-21 12:18:49,093 - network_api - INFO - API request received: /api/historical/24h
+2025-06-21 12:18:49,095 - network_metrics - INFO - Retrieved 0 historical data points for timeframe: 24h
+2025-06-21 12:18:49,096 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:18:49] "GET /api/historical/24h HTTP/1.1" 200 -
+2025-06-21 12:19:16,829 - network_metrics - WARNING - Traceroute timed out
+2025-06-21 12:19:17,134 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:19:17,134 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:19:17,327 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:19:17,327 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:19:17,388 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 12:19:17,392 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 12:19:17,392 - network_api - INFO - Background metrics collection completed
+2025-06-21 12:19:56,714 - network_metrics - INFO - Bandwidth: Download=41.10 Mbps, Upload=9.91 Mbps
+2025-06-21 12:19:56,844 - network_metrics - INFO - Latency: 129.01 ms
+2025-06-21 12:19:57,013 - network_metrics - INFO - Jitter: 19.84 ms
+2025-06-21 12:19:57,015 - network_metrics - INFO - DNS Lookup Time: 1.10 ms
+2025-06-21 12:20:27,038 - network_metrics - WARNING - Traceroute timed out
+2025-06-21 12:20:27,358 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:20:27,358 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:20:27,480 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:20:27,480 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:20:27,503 - network_metrics - INFO - Network metrics collected successfully
+2025-06-21 12:20:27,505 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 12:20:27,572 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 12:20:27,572 - network_metrics - INFO - Sending alert to your_email@gmail.com: High packet loss or latency detected!
+2025-06-21 12:20:27,672 - network_metrics - INFO - ALERT WOULD BE SENT TO your_email@gmail.com: High packet loss or latency detected!
+2025-06-21 12:20:27,672 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:20:27] "GET /api/metrics HTTP/1.1" 200 -
+2025-06-21 12:20:27,997 - network_api - INFO - API request received: /api/protocol_test/tcp
+2025-06-21 12:20:27,998 - network_metrics - INFO - Testing protocol performance: tcp
+2025-06-21 12:20:27,998 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:21:50,684 - network_metrics - INFO - Bandwidth: Download=42.16 Mbps, Upload=10.41 Mbps
+2025-06-21 12:21:50,759 - network_metrics - INFO - Latency: 75.18 ms
+2025-06-21 12:21:50,914 - network_metrics - INFO - Jitter: 8.43 ms
+2025-06-21 12:21:50,916 - network_metrics - INFO - DNS Lookup Time: 0.90 ms
+2025-06-21 12:22:20,928 - network_metrics - WARNING - Traceroute timed out
+2025-06-21 12:22:21,263 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:22:21,263 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:22:21,332 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:22:21,332 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:22:21,333 - werkzeug - INFO - 127.0.0.1 - - [21/Jun/2025 12:22:21] "GET /api/protocol_test/tcp HTTP/1.1" 200 -
+2025-06-21 12:24:17,393 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:25:39,849 - network_metrics - INFO - Bandwidth: Download=35.84 Mbps, Upload=6.74 Mbps
+2025-06-21 12:25:39,949 - network_metrics - INFO - Latency: 98.54 ms
+2025-06-21 12:25:40,113 - network_metrics - INFO - Jitter: 7.82 ms
+2025-06-21 12:25:40,139 - network_metrics - INFO - DNS Lookup Time: 25.21 ms
+2025-06-21 12:26:10,162 - network_metrics - WARNING - Traceroute timed out
+2025-06-21 12:26:10,493 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:26:10,493 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:26:10,584 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:26:10,584 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:26:10,622 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 12:26:10,623 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 12:26:10,623 - network_api - INFO - Background metrics collection completed
+2025-06-21 12:31:10,624 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:31:10,735 - network_metrics - ERROR - Bandwidth test failed: HTTP Error 403: Forbidden
+2025-06-21 12:31:10,773 - network_metrics - INFO - Latency: 36.11 ms
+2025-06-21 12:31:10,943 - network_metrics - INFO - Jitter: 5.96 ms
+2025-06-21 12:31:10,967 - network_metrics - INFO - DNS Lookup Time: 23.74 ms
+2025-06-21 12:31:40,984 - network_metrics - WARNING - Traceroute timed out
+2025-06-21 12:31:41,334 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:31:41,334 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:31:41,495 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:31:41,495 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:31:41,552 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 12:31:41,552 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 12:31:41,553 - network_api - INFO - Background metrics collection completed
+2025-06-21 12:36:41,553 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:36:41,556 - network_metrics - ERROR - Bandwidth test failed: <urlopen error [Errno 11001] getaddrinfo failed>
+2025-06-21 12:36:42,553 - network_metrics - WARNING - Ping to 8.8.8.8 timed out
+2025-06-21 12:36:47,288 - network_metrics - INFO - Jitter: 0.00 ms
+2025-06-21 12:36:47,288 - network_metrics - ERROR - DNS lookup failed: [Errno 11001] getaddrinfo failed
+2025-06-21 12:36:59,322 - network_metrics - INFO - Traceroute hops: 5
+2025-06-21 12:36:59,327 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:36:59,327 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:36:59,481 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:36:59,482 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:36:59,590 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 12:36:59,592 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 12:36:59,593 - network_api - INFO - Background metrics collection completed
+2025-06-21 12:41:59,593 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:41:59,597 - network_metrics - ERROR - Bandwidth test failed: <urlopen error [Errno 11001] getaddrinfo failed>
+2025-06-21 12:42:00,603 - network_metrics - WARNING - Ping to 8.8.8.8 timed out
+2025-06-21 12:42:05,291 - network_metrics - INFO - Jitter: 0.00 ms
+2025-06-21 12:42:05,291 - network_metrics - ERROR - DNS lookup failed: [Errno 11001] getaddrinfo failed
+2025-06-21 12:42:17,300 - network_metrics - INFO - Traceroute hops: 5
+2025-06-21 12:42:17,313 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:42:17,313 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:42:17,541 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:42:17,542 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:42:17,656 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 12:42:17,658 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 12:42:17,658 - network_api - INFO - Background metrics collection completed
+2025-06-21 12:47:17,659 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:47:17,661 - network_metrics - ERROR - Bandwidth test failed: <urlopen error [Errno 11001] getaddrinfo failed>
+2025-06-21 12:47:18,660 - network_metrics - WARNING - Ping to 8.8.8.8 timed out
+2025-06-21 12:47:23,282 - network_metrics - INFO - Jitter: 0.00 ms
+2025-06-21 12:47:23,284 - network_metrics - ERROR - DNS lookup failed: [Errno 11001] getaddrinfo failed
+2025-06-21 12:47:35,315 - network_metrics - INFO - Traceroute hops: 5
+2025-06-21 12:47:35,320 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:47:35,320 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:47:35,617 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:47:35,617 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:47:35,752 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 12:47:35,753 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 12:47:35,755 - network_api - INFO - Background metrics collection completed
+2025-06-21 12:52:35,756 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:52:35,758 - network_metrics - ERROR - Bandwidth test failed: <urlopen error [Errno 11001] getaddrinfo failed>
+2025-06-21 12:52:36,756 - network_metrics - WARNING - Ping to 8.8.8.8 timed out
+2025-06-21 12:52:41,288 - network_metrics - INFO - Jitter: 0.00 ms
+2025-06-21 12:52:41,289 - network_metrics - ERROR - DNS lookup failed: [Errno 11001] getaddrinfo failed
+2025-06-21 12:52:53,323 - network_metrics - INFO - Traceroute hops: 5
+2025-06-21 12:52:53,327 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:52:53,327 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:52:53,456 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:52:53,456 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:52:53,494 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 12:52:53,496 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 12:52:53,496 - network_api - INFO - Background metrics collection completed
+2025-06-21 12:57:53,496 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 12:57:53,499 - network_metrics - ERROR - Bandwidth test failed: <urlopen error [Errno 11001] getaddrinfo failed>
+2025-06-21 12:57:54,497 - network_metrics - WARNING - Ping to 8.8.8.8 timed out
+2025-06-21 12:57:59,294 - network_metrics - INFO - Jitter: 0.00 ms
+2025-06-21 12:57:59,295 - network_metrics - ERROR - DNS lookup failed: [Errno 11001] getaddrinfo failed
+2025-06-21 12:58:11,317 - network_metrics - INFO - Traceroute hops: 5
+2025-06-21 12:58:11,332 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 12:58:11,332 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 12:58:11,435 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 12:58:11,435 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 12:58:11,516 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 12:58:11,519 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 12:58:11,519 - network_api - INFO - Background metrics collection completed
+2025-06-21 13:03:11,520 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 13:03:11,674 - network_metrics - ERROR - Bandwidth test failed: HTTP Error 403: Forbidden
+2025-06-21 13:03:11,704 - network_metrics - INFO - Latency: 29.10 ms
+2025-06-21 13:03:11,857 - network_metrics - INFO - Jitter: 3.36 ms
+2025-06-21 13:03:11,880 - network_metrics - INFO - DNS Lookup Time: 22.03 ms
+2025-06-21 13:03:41,910 - network_metrics - WARNING - Traceroute timed out
+2025-06-21 13:03:42,242 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 13:03:42,242 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 13:03:42,364 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 13:03:42,364 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 13:03:42,438 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 13:03:42,440 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 13:03:42,440 - network_api - INFO - Background metrics collection completed
+2025-06-21 13:08:42,441 - network_metrics - INFO - Starting metrics collection for protocol: tcp
+2025-06-21 13:09:05,931 - network_metrics - INFO - Bandwidth: Download=43.59 Mbps, Upload=11.60 Mbps
+2025-06-21 13:09:06,005 - network_metrics - INFO - Latency: 72.79 ms
+2025-06-21 13:09:06,159 - network_metrics - INFO - Jitter: 5.00 ms
+2025-06-21 13:09:06,182 - network_metrics - INFO - DNS Lookup Time: 22.74 ms
+2025-06-21 13:09:36,214 - network_metrics - WARNING - Traceroute timed out
+2025-06-21 13:09:36,548 - network_metrics - INFO - Packets: Sent=10, Received=10, Loss=0.00%
+2025-06-21 13:09:36,548 - network_metrics - INFO - Using simulated bandwidth utilization data
+2025-06-21 13:09:36,654 - network_metrics - INFO - Test result saved for protocol: tcp
+2025-06-21 13:09:36,655 - network_metrics - INFO - Metrics collection completed successfully
+2025-06-21 13:09:36,697 - network_api - INFO - Metrics stored in database successfully
+2025-06-21 13:09:36,699 - network_metrics - INFO - Metrics saved to CSV file: network_metrics.csv
+2025-06-21 13:09:36,699 - network_api - INFO - Background metrics collection completed
+2025-06-21 13:14:36,701 - network_metrics - INFO - Starting metrics collection for protocol: tcp

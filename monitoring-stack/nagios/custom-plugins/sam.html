@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Analyzer Pipeline DevOps Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .architecture-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .architecture-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4285f4, #34a853, #fbbc05, #ea4335);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+        
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .environment-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .environment-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .environment-header h2 {
+            color: #495057;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .layer {
+            margin-bottom: 25px;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .layer-infrastructure {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .layer-cicd {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .layer-application {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .layer-monitoring {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+        
+        .layer-security {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        
+        .layer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .layer-icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 12px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .layer-title {
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .component {
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .component:hover {
+            transform: translateY(-2px);
+        }
+        
+        .component-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .component-details {
+            font-size: 0.9em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .metrics-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .metrics-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .metrics-header h2 {
+            color: #495057;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 2px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .metric-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            color: #7f8c8d;
+            font-size: 1em;
+            font-weight: 500;
+        }
+        
+        .metric-download {
+            color: #27ae60;
+        }
+        
+        .metric-upload {
+            color: #3498db;
+        }
+        
+        .metric-success {
+            color: #e74c3c;
+        }
+        
+        .data-flow {
+            margin-top: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .data-flow h2 {
+            text-align: center;
+            color: #495057;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .flow-step {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 2px solid #e9ecef;
+            flex: 1;
+            min-width: 150px;
+            position: relative;
+        }
+        
+        .flow-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+        
+        .flow-step h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .flow-step p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .legend-infrastructure {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .legend-cicd {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .legend-application {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .legend-monitoring {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .legend-security {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .legend-text {
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        @media (max-width: 768px) {
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-step:not(:last-child)::after {
+                content: '↓';
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+                bottom: -25px;
+            }
+            
+            .flow-diagram {
+                flex-direction: column;
+            }
+            
+            .legend {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="architecture-container">
+        <div class="header">
+            <h1>Network Analyzer Pipeline DevOps Architecture</h1>
+            <p>Enterprise-grade system architecture for real-time network analysis and monitoring</p>
+        </div>
+        
+        <div class="architecture-grid">
+            <!-- Development Environment -->
+            <div class="environment-section">
+                <div class="environment-header">
+                    <h2>Development Environment</h2>
+                    <span class="status-badge status-info">Windows Development</span>
+                </div>
+                
+                <div class="layer layer-infrastructure">
+                    <div class="layer-header">
+                        <div class="layer-icon">🐳</div>
+                        <div class="layer-title">Infrastructure Layer</div>
+                    </div>
+                    <div class="components-grid">
+                        <div class="component">
+                            <div class="component-title">Docker Desktop</div>
+                            <div class="component-details">Windows-based containerization platform</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-title">Docker Compose</div>
+                            <div class="component-details">Multi-container orchestration</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="layer layer-cicd">
+                    <div class="layer-header">
+                        <div class="layer-icon">🔄</div>
+                        <div class="layer-title">CI/CD Pipeline</div>
+                    </div>
+                    <div class="components-grid">
+                        <div class="component">
+                            <div class="component-title">Git Repository</div>
+                            <div class="component-details">Source control with feature branching</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-title">GitHub Actions</div>
+                            <div class="component-details">Automated build & test pipeline</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="layer layer-application">
+                    <div class="layer-header">
+                        <div class="layer-icon">📊</div>
+                        <div class="layer-title">Application Layer</div>
+                    </div>
+                    <div class="components-grid">
+                        <div class="component">
+                            <div class="component-title">Network Monitor</div>
+                            <div class="component-details">Development network analysis</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-title">Data Processor</div>
+                            <div class="component-details">Packet analysis engine</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Production Environment -->
+            <div class="environment-section">
+                <div class="environment-header">
+                    <h2>Production Environment</h2>
+                    <span class="status-badge status-success">AWS Cloud</span>
+                </div>
+                
+                <div class="layer layer-infrastructure">
+                    <div class="layer-header">
+                        <div class="layer-icon">☁️</div>
+                        <div class="layer-title">Cloud Infrastructure</div>
+                    </div>
+                    <div class="components-grid">
+                        <div class="component">
+                            <div class="component-title">ECS Fargate</div>
+                            <div class="component-details">Serverless container platform</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-title">Application Load Balancer</div>
+                            <div class="component-details">High availability & scaling</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-title">RDS PostgreSQL</div>
+                            <div class="component-details">Managed database service</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="layer layer-monitoring">
+                    <div class="layer-header">
+                        <div class="layer-icon">📈</div>
+                        <div class="layer-title">Monitoring & Observability</div>
+                    </div>
+                    <div class="components-grid">
+                        <div class="component">
+                            <div class="component-title">CloudWatch</div>
+                            <div class="component-details">Infrastructure monitoring</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-title">ELK Stack</div>
+                            <div class="component-details">Centralized logging</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-title">Grafana Dashboard</div>
+                            <div class="component-details">Real-time visualization</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="layer layer-security">
+                    <div class="layer-header">
+                        <div class="layer-icon">🔒</div>
+                        <div class="layer-title">Security & Compliance</div>
+                    </div>
+                    <div class="components-grid">
+                        <div class="component">
+                            <div class="component-title">AWS WAF</div>
+                            <div class="component-details">Web application firewall</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-title">AWS KMS</div>
+                            <div class="component-details">Encryption key management</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-title">Container Security</div>
+                            <div class="component-details">Image scanning & vulnerability mgmt</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Performance Metrics -->
+        <div class="metrics-section">
+            <div class="metrics-header">
+                <h2>System Performance Metrics</h2>
+                <span class="status-badge status-success">Real-time Monitoring</span>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value metric-download">974.44</div>
+                    <div class="metric-label">Download Speed (Mbps)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value metric-upload">1060.17</div>
+                    <div class="metric-label">Upload Speed (Mbps)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value metric-success">100%</div>
+                    <div class="metric-label">Pipeline Success Rate</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99.9%</div>
+                    <div class="metric-label">System Uptime</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data Flow Diagram -->
+        <div class="data-flow">
+            <h2>Data Processing Pipeline</h2>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <h3>Data Ingestion</h3>
+                    <p>Network traffic capture and initial processing</p>
+                </div>
+                <div class="flow-step">
+                    <h3>Analysis Engine</h3>
+                    <p>Packet analysis and performance metrics calculation</p>
+                </div>
+                <div class="flow-step">
+                    <h3>Data Storage</h3>
+                    <p>Processed data storage in PostgreSQL</p>
+                </div>
+                <div class="flow-step">
+                    <h3>Visualization</h3>
+                    <p>Real-time dashboards and reporting</p>
+                </div>
+                <div class="flow-step">
+                    <h3>Alert System</h3>
+                    <p>Automated notifications and alerts</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color legend-infrastructure"></div>
+                <div class="legend-text">Infrastructure Layer</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-cicd"></div>
+                <div class="legend-text">CI/CD Pipeline</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-application"></div>
+                <div class="legend-text">Application Layer</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-monitoring"></div>
+                <div class="legend-text">Monitoring & Observability</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-security"></div>
+                <div class="legend-text">Security & Compliance</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
