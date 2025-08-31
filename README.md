@@ -1,4 +1,4 @@
-Network Analyzer Pipeline
+7Network Analyzer Pipeline
 Build Status
 Python
 License
@@ -209,11 +209,6 @@ Future Enhancements
 🔒 Enhanced Security: Network security monitoring and intrusion detection
 
 📱 Mobile Support: Mobile dashboard applications with push notifications
-
-🚀 Scalability: Kubernetes orchestration and microservices architecture
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 Author
 Samarth Tripathi
